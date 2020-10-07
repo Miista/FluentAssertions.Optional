@@ -101,9 +101,10 @@ namespace FluentAssertions.Optional.Tests
             {
                 // Arrange
                 var option = "Value".Some();
+                var value = "Value".Some();
                 
                 // Act
-                Action act = () => option.Should().Be("Value".Some());
+                Action act = () => option.Should().Be(value);
                 
                 // Assert
                 act.Should().NotThrow<XunitException>();
@@ -114,9 +115,10 @@ namespace FluentAssertions.Optional.Tests
             {
                 // Arrange
                 var option = Option.None<string>();
+                var value = "Value".Some();
                 
                 // Act
-                Action act = () => option.Should().Be("Value".Some());
+                Action act = () => option.Should().Be(value);
                 
                 // Assert
                 act.Should().Throw<XunitException>();

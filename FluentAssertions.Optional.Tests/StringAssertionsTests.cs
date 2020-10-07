@@ -31,7 +31,7 @@ namespace FluentAssertions.Optional.Tests
                 var option = "World".Some();
                 
                 // Act
-                Action act = () => option.Should().Be("Value".Some());
+                Action act = () => value.Should().Be(option);
                 
                 // Assert
                 act.Should().Throw<XunitException>();
