@@ -5,4 +5,8 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FluentAssertions.Optional\FluentAssertions.Optional.csproj" />
+  </ItemGroup>
+
 </Project>
