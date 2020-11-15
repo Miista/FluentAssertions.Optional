@@ -1,6 +1,19 @@
 var target = Argument("target", "Default");
 
 var solutionFile = "./src/FluentAssertions.Optional.sln";
+var packages = new[] {
+  new Package
+  {
+    Project = "FluentAssertions.Optional",
+    Targets = new[] {"netstandard1.3"}
+  }
+};
+
+class Package
+{
+  public string Project { get; set; }
+  public string[] Targets { get; set; }
+}
 
 Task("Build")
   .Does(() =>
@@ -37,7 +50,10 @@ Task("Pack")
   .IsDependentOn("Test")
   .Does(() =>
 {
-  Pack("FluentAssertions.Optional", new [] { "netstandard2.0" });
+  foreach (var package in packages)
+  {
+    Pack(package.Project, package.Targets);
+  }
 })
 ;
 

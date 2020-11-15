@@ -14,7 +14,7 @@
 	<tags>FluentAssertions Fluent Assertion Unit Testing Optional Some None Maybe Either</tags>
 
     <dependencies>
-	  <group targetFramework="netstandard2.0">
+	  <group targetFramework="netstandard1.3">
 	    <dependency id="FluentAssertions" version="5.9.0" />
 		<dependency id="Optional" version="4.0.0" />
 	  </group>
@@ -22,7 +22,7 @@
   </metadata>
 
   <files>
-	<file src="netstandard2.0\*.dll" target="lib\netstandard2.0" />
-	<file src="netstandard2.0\*.xml" target="lib\netstandard2.0" />
+	<file src="netstandard1.3\*.dll" target="lib\netstandard1.3" />
+	<file src="netstandard1.3\*.xml" target="lib\netstandard1.3" />
   </files>
 </package>
