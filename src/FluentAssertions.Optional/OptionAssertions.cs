@@ -8,9 +8,9 @@ namespace FluentAssertions.Optional
     {
         private readonly Option<T> _subject;
 
-        public OptionAssertions(Option<T> instance)
+        public OptionAssertions(Option<T> subject)
         {
-            _subject = instance;
+            _subject = subject;
         }
 
         [CustomAssertion]
