@@ -72,6 +72,19 @@ namespace FluentAssertions.Optional
         }
         
         [CustomAssertion]
+        public AndConstraint<OptionAssertions<T>> NotBeNone(string because = "", params object[] becauseArgs)
+        {
+            var assertion = Execute.Assertion;
+
+            assertion
+                .ForCondition(_subject.HasValue)
+                .BecauseOf(because, becauseArgs)
+                .FailWith("Expected {context:option} not to be None{reason} but found {0}.", _subject);
+
+            return new AndConstraint<OptionAssertions<T>>(this);
+        }
+        
+        [CustomAssertion]
         public AndConstraint<OptionAssertions<T>> BeSome(string because = "", params object[] becauseArgs)
         {
             var assertion = Execute.Assertion;
@@ -80,6 +93,19 @@ namespace FluentAssertions.Optional
                 .ForCondition(_subject.HasValue)
                 .BecauseOf(because, becauseArgs)
                 .FailWith("Expected {context:option} to be Some{reason} but found {0}.", _subject);
+
+            return new AndConstraint<OptionAssertions<T>>(this);
+        }
+        
+        [CustomAssertion]
+        public AndConstraint<OptionAssertions<T>> NotBeSome(string because = "", params object[] becauseArgs)
+        {
+            var assertion = Execute.Assertion;
+
+            assertion
+                .ForCondition(!_subject.HasValue)
+                .BecauseOf(because, becauseArgs)
+                .FailWith("Expected {context:option} not to be Some{reason} but found {0}.", _subject);
 
             return new AndConstraint<OptionAssertions<T>>(this);
         }
