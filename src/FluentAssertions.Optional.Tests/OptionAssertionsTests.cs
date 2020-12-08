@@ -150,6 +150,120 @@ namespace FluentAssertions.Optional.Tests
             }
         }
 
+        public class NotBeNoneTests
+        {
+            [Fact]
+            public void Does_not_throw()
+            {
+                // Arrange
+                var option = "Value".Some();
+
+                // Act
+                Action act = () => option.Should().NotBeNone();
+
+                // Assert
+                act.Should().NotThrow<XunitException>();
+            }
+            
+            [Fact]
+            public void Throws()
+            {
+                // Arrange
+                var option = Option.None<string>();
+
+                // Act
+                Action act = () => option.Should().NotBeNone();
+
+                // Assert
+                act.Should().Throw<XunitException>();
+            }
+
+            [Theory]
+            [ClassData(typeof(AnyTypeData))]
+            public void Works_with_any_type<T>(T value)
+            {
+                // Arrange
+                var option = value.Some();
+                
+                // Act
+                Action act = () => option.Should().NotBeNone();
+
+                // Assert
+                act.Should().NotThrow<XunitException>();
+            }
+            
+            [Theory]
+            [ClassData(typeof(AnyTypeData))]
+            public void Works_with_any_type_Throws<T>(T value)
+            {
+                // Arrange
+                var option = Option.None<T>();
+                
+                // Act
+                Action act = () => option.Should().NotBeNone();
+
+                // Assert
+                act.Should().Throw<XunitException>(because: "the optional is None");
+            }
+        }
+
+        public class NotBeSomeTests
+        {
+            [Fact]
+            public void Does_not_throw()
+            {
+                // Arrange
+                var option = Option.None<string>();
+                
+                // Act
+                Action act = () => option.Should().NotBeSome();
+                
+                // Assert
+                act.Should().NotThrow<XunitException>();
+            }
+            
+            [Fact]
+            public void Throws()
+            {
+                // Arrange
+                var option = "Value".Some();
+                
+                // Act
+                Action act = () => option.Should().NotBeSome();
+                
+                // Assert
+                act.Should().Throw<XunitException>();
+            }
+            
+            [Theory]
+            [ClassData(typeof(AnyTypeData))]
+            public void Works_with_any_type<T>(T value)
+            {
+                // Arrange
+                var option = Option.None<T>();
+                
+                // Act
+                Action act = () => option.Should().NotBeSome();
+
+                // Assert
+                act.Should().NotThrow<XunitException>();
+            }
+            
+            [Theory]
+            [ClassData(typeof(AnyTypeData))]
+            public void Works_with_any_type_Throws<T>(T value)
+            {
+                // Arrange
+                var option = value.Some();
+                
+                // Act
+                Action act = () => option.Should().NotBeSome();
+
+                // Assert
+                act.Should().Throw<XunitException>(because: "the optional contains a value");
+            }
+        }
+        
         public class HaveValueTests
         {
             [Fact]
