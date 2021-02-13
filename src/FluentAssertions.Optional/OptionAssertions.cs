@@ -58,7 +58,7 @@ namespace FluentAssertions.Optional
             Execute.Assertion
                 .ForCondition(!_subject.HasValue)
                 .BecauseOf(because, becauseArgs)
-                .FailWith("Expected {context:option} to be None{reason} but found {0}.");
+                .FailWith("Expected {context:option} to be None{reason} but found {0}.", _subject);
         }
         
         [CustomAssertion]
