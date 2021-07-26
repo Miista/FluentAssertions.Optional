@@ -1,4 +1,5 @@
-﻿using FluentAssertions.Primitives;
+﻿using System.Collections.Generic;
+using FluentAssertions.Primitives;
 using Optional;
 using Optional.Unsafe;
 
@@ -10,6 +11,20 @@ namespace FluentAssertions.Optional
         {
         }
 
+        [CustomAssertion]
+        public AndConstraint<StringAssertions> BeOneOf(
+            IEnumerable<string> validValues,
+            string because = "",
+            params object[] becauseArgs) =>
+            HaveValueAnd().BeOneOf(validValues, because, becauseArgs);
+
+        [CustomAssertion]
+        public AndConstraint<StringAssertions> BeEquivalentTo(
+            string expected,
+            string because = "",
+            params object[] becauseArgs) =>
+            HaveValueAnd().BeEquivalentTo(expected, because, becauseArgs);
+        
         // public AndConstraint<StringAssertions> Be(
         //     string expected,
         //     string because = "",
@@ -35,5 +50,11 @@ namespace FluentAssertions.Optional
         // {
         //     return HaveValue().Which.Should().EndWith(expected, because, becauseArgs);
         // }
+        
+        private StringAssertions HaveValueAnd()
+        {
+            HaveValue();
+            return new StringAssertions(Subject.ValueOrDefault());
+        }
     }
 }
