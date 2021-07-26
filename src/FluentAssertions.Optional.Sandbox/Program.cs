@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions.Execution;
 using FluentAssertions.Numeric;
 using FluentAssertions.Primitives;
@@ -58,6 +59,9 @@ namespace FluentAssertions.Optional.Sandbox
             optionalGuid.Should().BeSome().And.Be(Guid.Empty);
             optionalGuid.Should().BeSome().And.BeEmpty();
             // optionalGuid.Should().HaveValueThatShould().BeEmpty();
+
+            var optionalEnumerable = (new[] {"Hello"}.ToList() as IEnumerable<string>).Some();
+            optionalEnumerable.Should().BeInAscendingOrder(_ => _);
             
             var optionalList = new List<string> {"Hello"}.Some(); //Option.None<List<string>>(); //1.Some();
             var ass = new OptionalEquivalencyAssertions<List<string>>(optionalList);
