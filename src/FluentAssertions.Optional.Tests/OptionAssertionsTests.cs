@@ -234,7 +234,7 @@ namespace FluentAssertions.Optional.Tests
                 act.Should().Throw<XunitException>(because: "the optional contains a value");
             }
         }
-        
+
         public class HaveValueTests
         {
             [Fact]

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-	<id>FluentAssertions.Optional</id>
+	<id>FluentAssertions.OptionalAssertions</id>
 	<version>1.0.0-alpha</version>
 	<title>FluentAssertions: Asserting instances of Optional</title>
     <authors>Søren Guldmund</authors>
