@@ -10,5 +10,23 @@ namespace FluentAssertions.Optional
         public OptionalGuidAssertions(Option<Guid> subject) : base(subject, new GuidAssertions(subject.ValueOrDefault()))
         {
         }
+        
+        [CustomAssertion]
+        public AndConstraint<GuidAssertions> BeEmpty(
+            string because = "",
+            params object[] becauseArgs) =>
+            HaveValueAnd().BeEmpty(because, becauseArgs);
+        
+        [CustomAssertion]
+        public AndConstraint<GuidAssertions> NotBeEmpty(
+            string because = "",
+            params object[] becauseArgs) =>
+            HaveValueAnd().NotBeEmpty(because, becauseArgs);
+        
+        private GuidAssertions HaveValueAnd()
+        {
+            HaveValue();
+            return new GuidAssertions(Subject.ValueOrDefault());
+        }
     }
 }
