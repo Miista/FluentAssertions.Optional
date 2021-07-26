@@ -23,6 +23,20 @@ namespace FluentAssertions.Optional
             params object[] becauseArgs) =>
             HaveValueAnd().NotBeEmpty(because, becauseArgs);
         
+        [CustomAssertion]
+        public AndConstraint<GuidAssertions> Be(
+            Guid expected,
+            string because = "",
+            params object[] becauseArgs) =>
+            HaveValueAnd().Be(expected, because, becauseArgs);
+        
+        [CustomAssertion]
+        public AndConstraint<GuidAssertions> NotBe(
+            Guid unexpected,
+            string because = "",
+            params object[] becauseArgs) =>
+            HaveValueAnd().NotBe(unexpected, because, becauseArgs);
+        
         private GuidAssertions HaveValueAnd()
         {
             HaveValue();

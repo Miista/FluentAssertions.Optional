@@ -64,5 +64,69 @@ namespace FluentAssertions.Optional.Tests
                 act.Should().Throw<XunitException>();
             }
         }
+        
+        public class BeTests
+        {
+            [Fact]
+            public void Does_not_throw()
+            {
+                // Arrange
+                var guid = Guid.NewGuid();
+                var option = guid.Some();
+
+                // Act
+                Action act = () => option.Should().Be(guid);
+
+                // Assert
+                act.Should().NotThrow<XunitException>();
+            }
+
+            [Fact]
+            public void Throws()
+            {
+                // Arrange
+                var guid1 = Guid.NewGuid();
+                var guid2 = Guid.NewGuid();
+                var option = guid1.Some();
+
+                // Act
+                Action act = () => option.Should().Be(guid2);
+
+                // Assert
+                act.Should().Throw<XunitException>();
+            }
+        }
+        
+        public class NotBeTests
+        {
+            [Fact]
+            public void Does_not_throw()
+            {
+                // Arrange
+                var guid1 = Guid.NewGuid();
+                var guid2 = Guid.NewGuid();
+                var option = guid1.Some();
+
+                // Act
+                Action act = () => option.Should().NotBe(guid2);
+
+                // Assert
+                act.Should().NotThrow<XunitException>();
+            }
+
+            [Fact]
+            public void Throws()
+            {
+                // Arrange
+                var guid1 = Guid.NewGuid();
+                var option = guid1.Some();
+
+                // Act
+                Action act = () => option.Should().NotBe(guid1);
+
+                // Assert
+                act.Should().Throw<XunitException>();
+            }
+        }
     }
 }
