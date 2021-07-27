@@ -24,7 +24,7 @@ namespace FluentAssertions.Optional.Sandbox
             var n = Option.None<string, Exception>(new Exception("H"));
             n.Should().HaveAlternateValue();
             n.Should().BeNone();
-            n.Should().HaveException().WithMessage("H");
+            n.Should().HaveException().BeOfType<Exception>(); //WithMessage("H");
             // var optionalInt = Option.None<int>();
             // // optionalInt.Should().BeSome();
             // optionalInt.Should().Be(0);
