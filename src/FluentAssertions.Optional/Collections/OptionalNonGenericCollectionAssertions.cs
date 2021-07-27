@@ -8,7 +8,7 @@ using Optional.Unsafe;
 
 namespace FluentAssertions.Optional.Collections
 {
-    public class OptionalNonGenericCollectionAssertions : OptionContinuedAssertions<IEnumerable, OptionalNonGenericCollectionAssertions, NonGenericCollectionAssertions>
+    public class OptionalNonGenericCollectionAssertions : OptionalCollectionAssertions<IEnumerable, NonGenericCollectionAssertions>
     {
         public OptionalNonGenericCollectionAssertions(Option<IEnumerable> subject) : base(subject, new NonGenericCollectionAssertions(subject.ValueOrDefault()))
         {
