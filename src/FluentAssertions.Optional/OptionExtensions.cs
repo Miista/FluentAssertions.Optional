@@ -13,6 +13,8 @@ namespace FluentAssertions
         
         public static OptionalGuidAssertions Should(this Option<Guid> instance) => new OptionalGuidAssertions(instance);
         
+        public static OptionalBooleanAssertions Should(this Option<bool> instance) => new OptionalBooleanAssertions(instance);
+        
         public static OptionalDateTimeAssertions Should(this Option<DateTime> instance) => new OptionalDateTimeAssertions(instance);
         
         public static OptionalStringAssertions Should(this Option<string> instance) => new OptionalStringAssertions(instance);
