@@ -16,12 +16,12 @@ namespace FluentAssertions.Optional
     public ExceptionAssertions<Exception> HaveException(string because = "", params object[] becauseArgs)
     {
       Execute.Assertion
-        .ForCondition(!_subject.HasValue)
+        .ForCondition(!Subject.HasValue)
         .BecauseOf(because, becauseArgs)
-        .FailWith("Expected {context:option} to have exception{reason} but found {0}.", _subject);
+        .FailWith("Expected {context:option} to have exception{reason} but found {0}.", Subject);
 
       var exception = default(Exception);
-      _subject.MapException(actualException => exception = actualException);
+      Subject.MapException(actualException => exception = actualException);
             
       return new ExceptionAssertions<Exception>(new List<Exception>{exception});
     }
@@ -30,9 +30,9 @@ namespace FluentAssertions.Optional
     public void NotHaveException(string because = "", params object[] becauseArgs)
     {
       Execute.Assertion
-        .ForCondition(_subject.HasValue)
+        .ForCondition(Subject.HasValue)
         .BecauseOf(because, becauseArgs)
-        .FailWith("Expected {context:option} not to have exception{reason} but found {0}.", _subject);
+        .FailWith("Expected {context:option} not to have exception{reason} but found {0}.", Subject);
     }
   }
 }
