@@ -5,7 +5,7 @@ using FluentAssertions.Numeric;
 using Optional;
 using Optional.Unsafe;
 
-namespace FluentAssertions.Optional
+namespace FluentAssertions.Optional.Numeric
 {
     public class OptionalNumericAssertions<T> : OptionContinuedAssertions<T, OptionalNumericAssertions<T>, NumericAssertions<T>> where T : struct 
     {

@@ -1,5 +1,6 @@
 using System;
 using FluentAssertions.Optional;
+using FluentAssertions.Optional.Numeric;
 using Optional;
 
 // ReSharper disable once CheckNamespace
