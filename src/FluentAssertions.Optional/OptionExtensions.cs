@@ -45,6 +45,8 @@ namespace FluentAssertions
         
         public static OptionalNumericAssertions<decimal> Should(this Option<decimal> instance) => new OptionalNumericAssertions<decimal>(instance);
         
+        public static OptionEitherExceptionAssertions<T> Should<T>(this Option<T, Exception> instance) => new OptionEitherExceptionAssertions<T>(instance);
+        
         public static OptionEitherAssertions<T, TException> Should<T, TException>(this Option<T, TException> instance) => new OptionEitherAssertions<T, TException>(instance);
     }
 }

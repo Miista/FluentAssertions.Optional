@@ -244,7 +244,7 @@ namespace FluentAssertions.Optional.Tests
                 var option = Option.None<string, Exception>(new Exception());
 
                 // Act
-                Action act = () => option.Should().HaveException<Exception>();
+                Action act = () => option.Should().HaveException();
 
                 // Assert
                 act.Should().NotThrow<XunitException>(because: "the option contains an exception and not a value");
@@ -257,7 +257,7 @@ namespace FluentAssertions.Optional.Tests
                 var option = "Value".Some<string, Exception>();
 
                 // Act
-                Action act = () => option.Should().HaveException<Exception>();
+                Action act = () => option.Should().HaveException();
 
                 // Assert
                 act.Should().Throw<XunitException>(because: "the optional contains a value and not an exception");
@@ -271,7 +271,7 @@ namespace FluentAssertions.Optional.Tests
                 var option = Option.None<T, Exception>(new Exception());
                 
                 // Act
-                Action act = () => option.Should().HaveException<Exception>();
+                Action act = () => option.Should().HaveException();
 
                 // Assert
                 act.Should().NotThrow<XunitException>(because: "the optional is None");
@@ -285,7 +285,7 @@ namespace FluentAssertions.Optional.Tests
                 var option = value.Some<T, Exception>();
                 
                 // Act
-                Action act = () => option.Should().HaveException<Exception>();
+                Action act = () => option.Should().HaveException();
 
                 // Assert
                 act.Should().Throw<XunitException>(because: "the optional contains a value");

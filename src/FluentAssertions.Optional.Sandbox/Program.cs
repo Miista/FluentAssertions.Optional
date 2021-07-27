@@ -18,7 +18,13 @@ namespace FluentAssertions.Optional.Sandbox
             // In other words, the following:
             var dateTime = DateTime.Now;
             dateTime.Should().Be(dateTime);
-            
+
+            //Action act = () => throw new Exception();
+            //act.Should().Throw<Exception>().BeOfType<Exception>();
+            var n = Option.None<string, Exception>(new Exception("H"));
+            n.Should().HaveAlternateValue();
+            n.Should().BeNone();
+            n.Should().HaveException().WithMessage("H");
             // var optionalInt = Option.None<int>();
             // // optionalInt.Should().BeSome();
             // optionalInt.Should().Be(0);
