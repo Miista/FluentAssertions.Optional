@@ -12,6 +12,13 @@ namespace FluentAssertions.Optional.Sandbox
     {
         static void Main(string[] args)
         {
+            // The "code" should be a drop-in replacement,
+            // meaning that if you change the type of a property
+            // any existing assertions should work.
+            // In other words, the following:
+            var dateTime = DateTime.Now;
+            dateTime.Should().Be(dateTime);
+            
             // var optionalInt = Option.None<int>();
             // // optionalInt.Should().BeSome();
             // optionalInt.Should().Be(0);
@@ -35,47 +42,47 @@ namespace FluentAssertions.Optional.Sandbox
             // // int? nullableInt = null;
             // // nullableInt.Should().Be(0);
 
-            var optionalString = "Hello".Some();
-            optionalString.Should().BeSome().And.StartWith("He").And.EndWith("llo").And.HaveLength(5);
-
-            var optionalDateTime = DateTime.Now.Some();
-            optionalDateTime.Should().BeSome().And.BeCloseTo(DateTime.Now);
-            
-            var optionalInt = 1.Some();
-            optionalInt.Should().BeSome().And.Be(1);
-            optionalInt.Should().BeSome().And.BePositive();
-
-            var optionalNegativeInt = (-1).Some();
-            optionalNegativeInt.Should().BeSome().And.BeNegative();
-
-            var optionalDouble = 2.0.Some();
-            optionalDouble.Should().BeSome().And.Be(2);
-            optionalDouble.Should().BeSome(2);
-            optionalDouble.Should().Be(optionalDouble);
-            optionalDouble.Should().HaveValue().Which.Should().Be(2);
-            
-            var optionalGuid = Guid.Empty.Some();
-            optionalGuid.Should().BeSome().And.Be(Guid.Empty);
-            optionalGuid.Should().BeSome().And.BeEmpty();
-            // optionalGuid.Should().HaveValueThatShould().BeEmpty();
-            
-            var optionalList = new List<string> {"Hello"}.Some(); //Option.None<List<string>>(); //1.Some();
-            var ass = new OptionalEquivalencyAssertions<List<string>>(optionalList);
-            ass.BeEquivalentTo(new List<string>());
-
-            Console.WriteLine("Hello World!");
-
-            Action act;
-            var optionalException = Option.None<string, Exception>(new Exception("Hello"));
-            // optionalException.Should().BeNone();
-            // Option.Some<string, Exception>("").Should().HaveAlternateValue();
-            optionalException.Should().HaveException<Exception>().WithMessage("Hello");
-
-            var optionalEither = Option.None<string, int>(0);
-            optionalEither.Should().HaveAlternateValue().Which.Should().BeGreaterOrEqualTo(1);
-            
-            // var optionalEitherFail = Option.None<string, int>(0);
-            // optionalEitherFail.Should().NotHaveAlternateValue();
+//            var optionalString = "Hello".Some();
+//            optionalString.Should().BeSome().And.StartWith("He").And.EndWith("llo").And.HaveLength(5);
+//
+//            var optionalDateTime = DateTime.Now.Some();
+//            optionalDateTime.Should().BeSome().And.BeCloseTo(DateTime.Now);
+//            
+//            var optionalInt = 1.Some();
+//            optionalInt.Should().BeSome().And.Be(1);
+//            optionalInt.Should().BeSome().And.BePositive();
+//
+//            var optionalNegativeInt = (-1).Some();
+//            optionalNegativeInt.Should().BeSome().And.BeNegative();
+//
+//            var optionalDouble = 2.0.Some();
+//            optionalDouble.Should().BeSome().And.Be(2);
+//            optionalDouble.Should().BeSome(2);
+//            optionalDouble.Should().Be(optionalDouble);
+//            optionalDouble.Should().HaveValue().Which.Should().Be(2);
+//            
+//            var optionalGuid = Guid.Empty.Some();
+//            optionalGuid.Should().BeSome().And.Be(Guid.Empty);
+//            optionalGuid.Should().BeSome().And.BeEmpty();
+//            // optionalGuid.Should().HaveValueThatShould().BeEmpty();
+//            
+//            var optionalList = new List<string> {"Hello"}.Some(); //Option.None<List<string>>(); //1.Some();
+//            var ass = new OptionalEquivalencyAssertions<List<string>>(optionalList);
+//            ass.BeEquivalentTo(new List<string>());
+//
+//            Console.WriteLine("Hello World!");
+//
+//            Action act;
+//            var optionalException = Option.None<string, Exception>(new Exception("Hello"));
+//            // optionalException.Should().BeNone();
+//            // Option.Some<string, Exception>("").Should().HaveAlternateValue();
+//            optionalException.Should().HaveException<Exception>().WithMessage("Hello");
+//
+//            var optionalEither = Option.None<string, int>(0);
+//            optionalEither.Should().HaveAlternateValue().Which.Should().BeGreaterOrEqualTo(1);
+//            
+//            // var optionalEitherFail = Option.None<string, int>(0);
+//            // optionalEitherFail.Should().NotHaveAlternateValue();
         }
     }
 
