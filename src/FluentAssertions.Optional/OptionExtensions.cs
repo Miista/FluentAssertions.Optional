@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using FluentAssertions.Optional;
+using FluentAssertions.Optional.Collections;
 using FluentAssertions.Optional.Numeric;
 using FluentAssertions.Optional.Primitives;
 using Optional;
@@ -10,6 +12,8 @@ namespace FluentAssertions
     public static class OptionExtensions
     {
         public static OptionalAssertions<T> Should<T>(this Option<T> instance) => new OptionalAssertions<T>(instance);
+        
+        public static OptionalNonGenericCollectionAssertions Should(this Option<IEnumerable> instance) => new OptionalNonGenericCollectionAssertions(instance);
         
         public static OptionalGuidAssertions Should(this Option<Guid> instance) => new OptionalGuidAssertions(instance);
         
