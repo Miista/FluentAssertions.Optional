@@ -3,7 +3,7 @@ using FluentAssertions.Primitives;
 using Optional;
 using Optional.Unsafe;
 
-namespace FluentAssertions.Optional
+namespace FluentAssertions.Optional.Primitives
 {
     public class OptionalGuidAssertions : OptionContinuedAssertions<Guid, OptionalGuidAssertions, GuidAssertions>
     {

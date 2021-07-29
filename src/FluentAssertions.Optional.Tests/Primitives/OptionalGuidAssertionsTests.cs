@@ -3,7 +3,7 @@ using Optional;
 using Xunit;
 using Xunit.Sdk;
 
-namespace FluentAssertions.Optional.Tests
+namespace FluentAssertions.Optional.Tests.Primitives
 {
     public class OptionalGuidAssertionsTests
     {
