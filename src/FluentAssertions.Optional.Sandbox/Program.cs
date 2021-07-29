@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using FluentAssertions.Execution;
 using FluentAssertions.Numeric;
@@ -21,10 +22,14 @@ namespace FluentAssertions.Optional.Sandbox
 
             //Action act = () => throw new Exception();
             //act.Should().Throw<Exception>().BeOfType<Exception>();
-            var n = Option.None<string, Exception>(new Exception("H"));
-            n.Should().HaveAlternateValue();
-            n.Should().BeNone();
-            n.Should().HaveException().BeOfType<Exception>(); //WithMessage("H");
+            // var n = Option.None<string, Exception>(new Exception("H"));
+            // n.Should().HaveAlternateValue();
+            // n.Should().BeNone();
+            // n.Should().HaveException().BeOfType<Exception>(); //WithMessage("H");
+
+            var list = (new List<int> {1, 2, 3} as IEnumerable).Some();
+            list.Should().BeInAscendingOrder();
+            
             // var optionalInt = Option.None<int>();
             // // optionalInt.Should().BeSome();
             // optionalInt.Should().Be(0);
