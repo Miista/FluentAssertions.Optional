@@ -115,7 +115,23 @@ namespace FluentAssertions.Optional.Collections
       string because = "",
       params object[] becauseArgs) =>
       HaveValueAnd().ContainItemsAssignableTo<T>(because, becauseArgs);
-        
+
+    public AndConstraint<TAssertions> Contain(
+      IEnumerable expected,
+      string because = "",
+      params object[] becauseArgs) =>
+      HaveValueAnd().Contain(expected, because, becauseArgs);
+
+    public AndConstraint<TAssertions> ContainInOrder(
+      params object[] expected) =>
+      HaveValueAnd().ContainInOrder(expected);
+
+    public AndConstraint<TAssertions> ContainInOrder(
+      IEnumerable expected,
+      string because = "",
+      params object[] becauseArgs) =>
+      HaveValueAnd().ContainInOrder(expected, because, becauseArgs);
+    
     private TAssertions HaveValueAnd()
     {
       HaveValue();
