@@ -16,15 +16,37 @@ namespace FluentAssertions.Optional.Sandbox
             // meaning that if you change the type of a property
             // any existing assertions should work.
             // In other words, the following:
-            var dateTime = DateTime.Now;
+            var fromMinutes = TimeSpan.FromMinutes(10);
+            var d = DateTime.Now;
+            var dateTime = d.Some();
             dateTime.Should().Be(dateTime);
+            dateTime.Should().BeAfter(d.Subtract(fromMinutes));
+            dateTime.Should().BeCloseTo(d);
+            dateTime.Should().BeExactly(TimeSpan.Zero).After(d).And.BeExactly(TimeSpan.Zero).Before(d);
+            dateTime.Should().BeSameDateAs(d);
 
-            //Action act = () => throw new Exception();
-            //act.Should().Throw<Exception>().BeOfType<Exception>();
+            var b = true;
+            var boolean = b.Some();
+            boolean.Should().BeTrue();
+            boolean.Should().Be(true);
+
+            var i = 1;
+            var nt = i.Some();
+            nt.Should().BeOneOf(1, 2, 3);
+            nt.Should().BePositive();
+            nt.Should().BeGreaterThan(0);
+            nt.Should().BeGreaterOrEqualTo(1);
+            nt.Should().BeInRange(0, 10);
+
+            /*
+            Action act = () => throw new Exception();
+            act.Should().Throw<Exception>().BeOfType<Exception>();
+            
             var n = Option.None<string, Exception>(new Exception("H"));
             n.Should().HaveAlternateValue();
             n.Should().BeNone();
             n.Should().HaveException().BeOfType<Exception>(); //WithMessage("H");
+            */
             // var optionalInt = Option.None<int>();
             // // optionalInt.Should().BeSome();
             // optionalInt.Should().Be(0);
