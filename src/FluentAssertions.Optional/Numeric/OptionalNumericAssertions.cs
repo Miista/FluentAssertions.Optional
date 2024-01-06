@@ -2,11 +2,26 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using FluentAssertions.Numeric;
+using FluentAssertions.Optional.Primitives;
+using FluentAssertions.Primitives;
 using Optional;
 using Optional.Unsafe;
 
 namespace FluentAssertions.Optional.Numeric
 {
+    public class OptionalNumericAssertions<T> : NumericAssertions<T>, IOptionAssertions<T, NumericAssertions<T>> where T : struct
+    {
+        public new Option<T> Subject { get; }
+
+        public NumericAssertions<T> ContinuedAssertions => new NumericAssertions<T>(Subject.ValueOrDefault());
+
+        public OptionalNumericAssertions(Option<T> value) : base(value.ValueOrDefault())
+        {
+            Subject = value;
+        }
+    }
+
+    /*
     public class OptionalNumericAssertions<T> : OptionContinuedAssertions<T, OptionalNumericAssertions<T>, NumericAssertions<T>> where T : struct 
     {
         public OptionalNumericAssertions(Option<T> subject) : base(subject, new NumericAssertions<T>(subject.ValueOrDefault()))
@@ -108,4 +123,5 @@ namespace FluentAssertions.Optional.Numeric
             return new NumericAssertions<T>(Subject.ValueOrDefault());
         }
     }
+*/
 }

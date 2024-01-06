@@ -9,10 +9,130 @@ using Optional.Unsafe;
 
 namespace FluentAssertions.Optional.Sandbox
 {
+    public interface IOptionAssertions<TSubject, TAssertions>
+    {
+        Option<TSubject> Subject { get; }
+        TAssertions ContinuedAssertions { get; }
+    }
+    
+    public class OptStrAssertions : StringAssertions, IOptionAssertions<string, StringAssertions>
+    {
+        public new Option<string> Subject { get; }
+
+        public StringAssertions ContinuedAssertions => new StringAssertions(Subject.ValueOrDefault());
+
+        public OptStrAssertions(Option<string> value) : base(value.ValueOrDefault())
+        {
+            Subject = value;
+        }
+    }
+    
+    public class OptDateTimeAssertions : DateTimeAssertions, IOptionAssertions<DateTime, DateTimeAssertions>
+    {
+        public new Option<DateTime> Subject { get; }
+
+        public DateTimeAssertions ContinuedAssertions => new DateTimeAssertions(Subject.ValueOrDefault());
+
+        public OptDateTimeAssertions(Option<DateTime> value) : base(value.ValueOrDefault())
+        {
+            Subject = value;
+        }
+    }
+
+    public class OptBooleanAssertions : BooleanAssertions, IOptionAssertions<bool, BooleanAssertions>
+    {
+        public new Option<bool> Subject { get; }
+
+        public BooleanAssertions ContinuedAssertions => new BooleanAssertions(Subject.ValueOrDefault());
+
+        public OptBooleanAssertions(Option<bool> value) : base(value.ValueOrDefault())
+        {
+            Subject = value;
+        }
+    }
+    
+    public static class TExt
+    {
+        public static OptDateTimeAssertions Should(this Option<DateTime> value)
+        {
+            return new OptDateTimeAssertions(value);
+        }
+        
+        public static OptBooleanAssertions Should(this Option<bool> value)
+        {
+            return new OptBooleanAssertions(value);
+        }
+
+        public static OptStrAssertions Should(this Option<string> value)
+        {
+            return new OptStrAssertions(value);
+        }
+        
+        [CustomAssertion]
+        public static void BeNone<TSubject, TAssertions>(
+            this IOptionAssertions<TSubject, TAssertions> self,
+            string because = "",
+            params object[] becauseArgs
+        )
+        {
+            Execute.Assertion
+                .ForCondition(!self.Subject.HasValue)
+                .BecauseOf(because, becauseArgs)
+                .FailWith("Expected {context:option} to be None{reason} but found {0}.", self.Subject);
+        }
+        
+        [CustomAssertion]
+        public static AndConstraint<TAssertions> BeSome<TSubject, TAssertions>(
+            this IOptionAssertions<TSubject, TAssertions> self,
+            string because = "",
+            params object[] becauseArgs
+        )
+        {
+            Execute.Assertion
+                .ForCondition(self.Subject.HasValue)
+                .BecauseOf(because, becauseArgs)
+                .FailWith("Expected {context:option} to be Some{reason} but found {0}.", self.Subject);
+
+            return new AndConstraint<TAssertions>(self.ContinuedAssertions);
+        }
+        
+        [CustomAssertion]
+        public static AndConstraint<TAssertions> NotBeNone<TSubject, TAssertions>(
+            this IOptionAssertions<TSubject, TAssertions> self,
+            string because = "",
+            params object[] becauseArgs
+        )
+        {
+            Execute.Assertion
+                .ForCondition(self.Subject.HasValue)
+                .BecauseOf(because, becauseArgs)
+                .FailWith("Expected {context:option} not to be None{reason} but found {0}.", self.Subject);
+        
+            return new AndConstraint<TAssertions>(self.ContinuedAssertions);
+        }
+    }
+    
     class Program
     {
         static void Main(string[] args)
         {
+            var optGuid = Guid.Empty.Some();
+
+            optGuid.Should().BeSome();
+            optGuid.Should().Be(Guid.Empty);
+            /*
+            var str = "Hello, World!";
+            var optString = str.Some();
+
+            str.Should().BeEquivalentTo("Hello, World!");
+            optString.Should().BeEquivalentTo(str);
+            optString.Should().BeSome().And.BeEquivalentTo(str);
+
+            var noneString = Option.None<string>();
+            noneString.Should().BeNone();
+            noneString.Should().BeEquivalentTo(str);
+            */
+            
             // The "code" should be a drop-in replacement,
             // meaning that if you change the type of a property
             // any existing assertions should work.
@@ -20,6 +140,18 @@ namespace FluentAssertions.Optional.Sandbox
             var dateTime = DateTime.Now;
             dateTime.Should().Be(dateTime);
 
+            var optDateTime = dateTime.Some();
+            optDateTime.Should().BeSome();
+            optDateTime.Should().BeSameDateAs(dateTime);
+
+            // optDateTime.Should().BeNone();
+
+            var b = true;
+            var optB = b.Some();
+
+            b.Should().BeTrue();
+            optB.Should().BeTrue();
+            
             //Action act = () => throw new Exception();
             //act.Should().Throw<Exception>().BeOfType<Exception>();
             // var n = Option.None<string, Exception>(new Exception("H"));

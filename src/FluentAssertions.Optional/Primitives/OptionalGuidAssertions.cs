@@ -5,6 +5,19 @@ using Optional.Unsafe;
 
 namespace FluentAssertions.Optional.Primitives
 {
+    public class OptionalGuidAssertions : GuidAssertions, IOptionAssertions<Guid, GuidAssertions>
+    {
+        public new Option<Guid> Subject { get; }
+
+        public GuidAssertions ContinuedAssertions => new GuidAssertions(Subject.ValueOrDefault());
+
+        public OptionalGuidAssertions(Option<Guid> value) : base(value.ValueOrDefault())
+        {
+            Subject = value;
+        }
+    }
+
+    /*
     public class OptionalGuidAssertions : OptionContinuedAssertions<Guid, OptionalGuidAssertions, GuidAssertions>
     {
         public OptionalGuidAssertions(Option<Guid> subject) : base(subject, new GuidAssertions(subject.ValueOrDefault()))
@@ -43,4 +56,5 @@ namespace FluentAssertions.Optional.Primitives
             return new GuidAssertions(Subject.ValueOrDefault());
         }
     }
+*/
 }

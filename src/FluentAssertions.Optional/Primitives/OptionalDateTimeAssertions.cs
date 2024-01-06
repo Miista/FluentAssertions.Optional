@@ -6,6 +6,19 @@ using Optional.Unsafe;
 
 namespace FluentAssertions.Optional.Primitives
 {
+  public class OptionalDateTimeAssertions : DateTimeAssertions, IOptionAssertions<DateTime, DateTimeAssertions>
+  {
+    public new Option<DateTime> Subject { get; }
+
+    public DateTimeAssertions ContinuedAssertions => new DateTimeAssertions(Subject.ValueOrDefault());
+
+    public OptionalDateTimeAssertions(Option<DateTime> value) : base(value.ValueOrDefault())
+    {
+      Subject = value;
+    }
+  }
+
+    /*
     public class OptionalDateTimeAssertions : OptionContinuedAssertions<DateTime, OptionalDateTimeAssertions, DateTimeAssertions>
     {
         public OptionalDateTimeAssertions(Option<DateTime> subject) : base(subject, new DateTimeAssertions(subject.ValueOrDefault()))
@@ -625,4 +638,5 @@ namespace FluentAssertions.Optional.Primitives
       params object[] becauseArgs)
       => HaveValueAnd().BeIn(expectedKind, because, becauseArgs);
     }
+*/
 }
