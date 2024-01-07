@@ -1,23 +1,22 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Optional;
-using Optional.Unsafe;
 using Xunit;
 using Xunit.Sdk;
 
 namespace FluentAssertions.Optional.Tests.Collections
 {
-    public class OptionalCollectionAssertionsTests
+    public class OptionalGenericCollectionAssertionsTests
     {
-        public class BeEmptyTests
+                public class BeEmptyTests
         {
             [Fact]
             public void Does_not_throw()
             {
                 // Arrange
-                var enumerable = (Enumerable.Empty<int>() as IEnumerable).Some();
+                var enumerable = Enumerable.Empty<int>().Some();
 
                 // Act
                 Action act = () => enumerable.Should().BeEmpty();
@@ -30,7 +29,7 @@ namespace FluentAssertions.Optional.Tests.Collections
             public void Throws()
             {
                 // Arrange
-                var enumerable = (Enumerable.Repeat(1, 1) as IEnumerable).Some();
+                var enumerable = Enumerable.Repeat(1, 1).Some();
 
                 // Act
                 Action act = () => enumerable.Should().BeEmpty();
@@ -46,7 +45,7 @@ namespace FluentAssertions.Optional.Tests.Collections
             public void Does_not_throw()
             {
                 // Arrange
-                var enumerable = (Enumerable.Repeat(1, 1) as IEnumerable).Some();
+                var enumerable = Enumerable.Repeat(1, 1).Some();
 
                 // Act
                 Action act = () => enumerable.Should().NotBeEmpty();
@@ -59,7 +58,7 @@ namespace FluentAssertions.Optional.Tests.Collections
             public void Throws()
             {
                 // Arrange
-                var enumerable = (Enumerable.Empty<int>() as IEnumerable).Some();
+                var enumerable = (Enumerable.Empty<int>() ).Some();
 
                 // Act
                 Action act = () => enumerable.Should().NotBeEmpty();
@@ -90,7 +89,7 @@ namespace FluentAssertions.Optional.Tests.Collections
             public void Throws()
             {
                 // Arrange
-                var enumerable = (new[] {1} as IEnumerable).Some();
+                var enumerable = (new[] {1} as IEnumerable<int>).Some();
 
                 // Act
                 Action act = () => enumerable.Should().BeNullOrEmpty();
@@ -106,7 +105,7 @@ namespace FluentAssertions.Optional.Tests.Collections
             public void Does_not_throw()
             {
                 // Arrange
-                var enumerable = (new[] {1} as IEnumerable).Some();
+                var enumerable = (new[] {1} as IEnumerable<int>).Some();
 
                 // Act
                 Action act = () => enumerable.Should().NotBeNullOrEmpty();
@@ -137,7 +136,7 @@ namespace FluentAssertions.Optional.Tests.Collections
             public void Does_not_throw()
             {
                 // Arrange
-                var enumerable = (new[] {1,2,3} as IEnumerable).Some();
+                var enumerable = (new[] {1,2,3} as IEnumerable<int>).Some();
 
                 // Act
                 Action act = () => enumerable.Should().OnlyHaveUniqueItems();
@@ -150,7 +149,7 @@ namespace FluentAssertions.Optional.Tests.Collections
             public void Throws()
             {
                 // Arrange
-                var enumerable = (new[] {1, 1} as IEnumerable).Some();
+                var enumerable = (new[] {1, 1} as IEnumerable<int>).Some();
 
                 // Act
                 Action act = () => enumerable.Should().OnlyHaveUniqueItems();
@@ -166,7 +165,7 @@ namespace FluentAssertions.Optional.Tests.Collections
             public void Does_not_throw()
             {
                 // Arrange
-                var enumerable = (new[] {1,2,3} as IEnumerable).Some();
+                var enumerable = (new[] {1,2,3} as IEnumerable<int>).Some();
 
                 // Act
                 Action act = () => enumerable.Should().NotContainNulls();
@@ -179,7 +178,7 @@ namespace FluentAssertions.Optional.Tests.Collections
             public void Throws()
             {
                 // Arrange
-                var enumerable = (new object[] {null} as IEnumerable).Some();
+                var enumerable = (new object[] {null} as IEnumerable<object>).Some();
 
                 // Act
                 Action act = () => enumerable.Should().NotContainNulls();
@@ -197,7 +196,7 @@ namespace FluentAssertions.Optional.Tests.Collections
                 public void Does_not_throw()
                 {
                     // Arrange
-                    var enumerable = (new[] {1,2,3} as IEnumerable).Some();
+                    var enumerable = (new[] {1,2,3} as IEnumerable<int>).Some();
 
                     // Act
                     Action act = () => enumerable.Should().Equal(1, 2, 3);
@@ -210,7 +209,7 @@ namespace FluentAssertions.Optional.Tests.Collections
                 public void Throws()
                 {
                     // Arrange
-                    var enumerable = (new[] {1,2,3} as IEnumerable).Some();
+                    var enumerable = (new[] {1,2,3} as IEnumerable<int>).Some();
 
                     // Act
                     Action act = () => enumerable.Should().Equal(3, 2, 1);
@@ -227,7 +226,7 @@ namespace FluentAssertions.Optional.Tests.Collections
                 public void Does_not_throw()
                 {
                     // Arrange
-                    var enumerable = (new[] {1,2,3} as IEnumerable).Some();
+                    var enumerable = (new[] {1,2,3} as IEnumerable<int>).Some();
 
                     // Act
                     Action act = () => enumerable.Should().Equal(new[] {1, 2, 3});
@@ -240,7 +239,7 @@ namespace FluentAssertions.Optional.Tests.Collections
                 public void Throws()
                 {
                     // Arrange
-                    var enumerable = (new[] {1,2,3} as IEnumerable).Some();
+                    var enumerable = (new[] {1,2,3} as IEnumerable<int>).Some();
 
                     // Act
                     Action act = () => enumerable.Should().Equal(new[] {3, 2, 1});
@@ -260,7 +259,7 @@ namespace FluentAssertions.Optional.Tests.Collections
                 public void Does_not_throw()
                 {
                     // Arrange
-                    var enumerable = (new[] {1,2,3} as IEnumerable).Some();
+                    var enumerable = (new[] {1,2,3} as IEnumerable<int>).Some();
 
                     // Act
                     Action act = () => enumerable.Should().NotEqual(new[] {3, 2, 1});
@@ -273,7 +272,7 @@ namespace FluentAssertions.Optional.Tests.Collections
                 public void Throws()
                 {
                     // Arrange
-                    var enumerable = (new[] {1,2,3} as IEnumerable).Some();
+                    var enumerable = (new[] {1,2,3} as IEnumerable<int>).Some();
 
                     // Act
                     Action act = () => enumerable.Should().NotEqual(new[] {1, 2, 3});                    
@@ -299,8 +298,8 @@ namespace FluentAssertions.Optional.Tests.Collections
                 public void Does_not_throw(int[] values, int[] expectedValues)
                 {
                     // Arrange
-                    var enumerable = (values as IEnumerable).Some();
-                    var expected = expectedValues as IEnumerable;
+                    var enumerable = (values as IEnumerable<int>).Some();
+                    var expected = expectedValues as IEnumerable<int>;
 
                     // Act
                     Action act = () => enumerable.Should().BeEquivalentTo(expected);
@@ -313,8 +312,8 @@ namespace FluentAssertions.Optional.Tests.Collections
                 public void Throws()
                 {
                     // Arrange
-                    var enumerable = (new[] {1, 2, 3} as IEnumerable).Some();
-                    var unexpected = new[] {3, 1} as IEnumerable;
+                    var enumerable = (new[] {1, 2, 3} as IEnumerable<int>).Some();
+                    var unexpected = new[] {3, 1} as IEnumerable<int>;
 
                     // Act
                     Action act = () => enumerable.Should().BeEquivalentTo(unexpected);                    

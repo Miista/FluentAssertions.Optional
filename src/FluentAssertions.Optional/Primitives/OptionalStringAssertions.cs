@@ -4,12 +4,6 @@ using Optional.Unsafe;
 
 namespace FluentAssertions.Optional.Primitives
 {
-    public interface IOptionAssertions<TSubject, TAssertions>
-    {
-        Option<TSubject> Subject { get; }
-        TAssertions ContinuedAssertions { get; }
-    }
-    
     public class OptionalStringAssertions : StringAssertions, IOptionAssertions<string, StringAssertions>
     {
         public new Option<string> Subject { get; }
