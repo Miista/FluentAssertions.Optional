@@ -6,6 +6,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentAssertions.Optional.S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentAssertions.Optional.Tests", "FluentAssertions.Optional.Tests\FluentAssertions.Optional.Tests.csproj", "{9D4CBD72-4DC5-4993-A918-0F2FCFD359A6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget", "Nuget", "{8998413D-6DF7-4672-B1DA-BE514D873B0F}"
+	ProjectSection(SolutionItems) = preProject
+		..\nuget\FluentAssertions.Optional.nuspec = ..\nuget\FluentAssertions.Optional.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
