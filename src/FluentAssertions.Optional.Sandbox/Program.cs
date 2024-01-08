@@ -120,6 +120,9 @@ namespace FluentAssertions.Optional.Sandbox
 
             optGuid.Should().BeSome();
             optGuid.Should().Be(Guid.Empty);
+
+            var option = ((DateTime?)null).Some();
+            
             /*
             var str = "Hello, World!";
             var optString = str.Some();

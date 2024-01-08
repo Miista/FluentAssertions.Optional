@@ -14,6 +14,8 @@ namespace FluentAssertions
     {
         public static OptionalAssertions<T> Should<T>(this Option<T> instance) => new OptionalAssertions<T>(instance);
         
+        public static OptionalObjectAssertions Should(this Option<object> instance) => new OptionalObjectAssertions(instance);
+        
 #region Collection Assertions
         public static OptionalGenericDictionaryAssertions<TKey, TValue> Should<TKey, TValue>(this Option<IDictionary<TKey, TValue>> instance) => new OptionalGenericDictionaryAssertions<TKey, TValue>(instance);
         public static OptionalStringCollectionAssertions Should(this Option<IEnumerable<string>> instance) => new OptionalStringCollectionAssertions(instance);
@@ -25,8 +27,7 @@ namespace FluentAssertions
         public static OptionalNullableGuidAssertions Should(this Option<Guid?> instance) => new OptionalNullableGuidAssertions(instance);
         
         public static OptionalBooleanAssertions Should(this Option<bool> instance) => new OptionalBooleanAssertions(instance);
-        
-        public static OptionalDateTimeAssertions Should(this Option<DateTime> instance) => new OptionalDateTimeAssertions(instance);
+        public static OptionalNullableBooleanAssertions Should(this Option<bool?> instance) => new OptionalNullableBooleanAssertions(instance);
         
         public static OptionalStringAssertions Should(this Option<string> instance) => new OptionalStringAssertions(instance);
         
@@ -59,8 +60,17 @@ namespace FluentAssertions
 #endregion Nullable Numeric Assertions
 
         public static OptionalComparableTypeAssertions<T> Should<T>(this Option<IComparable<T>> comparableValue) => new OptionalComparableTypeAssertions<T>(comparableValue);
-
+        
+#region DateTime(Offset) + TimeSpan Assertions
+        public static OptionalDateTimeAssertions Should(this Option<DateTime> instance) => new OptionalDateTimeAssertions(instance);
+        public static OptionalNullableDateTimeAssertions Should(this Option<DateTime?> instance) => new OptionalNullableDateTimeAssertions(instance);
+        
         public static OptionalDateTimeOffsetAssertions Should(this Option<DateTimeOffset> actualValue) => new OptionalDateTimeOffsetAssertions(actualValue);
+        public static OptionalNullableDateTimeOffsetAssertions Should(this Option<DateTimeOffset?> actualValue) => new OptionalNullableDateTimeOffsetAssertions(actualValue);
+        
+        public static OptionalNullableSimpleTimeSpanAssertions Should(this Option<TimeSpan?> actualValue) => new OptionalNullableSimpleTimeSpanAssertions(actualValue);
+        public static OptionalSimpleTimeSpanAssertions Should(this Option<TimeSpan> actualValue) => new OptionalSimpleTimeSpanAssertions(actualValue);
+#endregion DateTime(Offset) + TimeSpan Assertions
 
         public static OptionEitherExceptionAssertions<T> Should<T>(this Option<T, Exception> instance) => new OptionEitherExceptionAssertions<T>(instance);
         
