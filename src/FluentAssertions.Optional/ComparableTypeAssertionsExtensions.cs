@@ -9,22 +9,22 @@ namespace FluentAssertions.Optional
     {
         [CustomAssertion]
         public static AndConstraint<ComparableTypeAssertions<T>> Be<T>(
-            this ComparableTypeAssertions<T> @this,
+            this ComparableTypeAssertions<T> self,
             Option<T> expected,
             string because = "",
             params object[] becauseArgs) where T : struct
         {
-            return @this.Be(expected.ValueOrDefault(), because, becauseArgs);
+            return self.Be(expected.ValueOrDefault(), because, becauseArgs);
         }
         
         [CustomAssertion]
         public static AndConstraint<ComparableTypeAssertions<T>> NotBe<T>(
-            this ComparableTypeAssertions<T> @this,
+            this ComparableTypeAssertions<T> self,
             Option<T> option,
             string because = "",
             params object[] becauseArgs) where T : struct
         {
-            return @this.NotBe(option.ValueOrDefault(), because, becauseArgs);
+            return self.NotBe(option.ValueOrDefault(), because, becauseArgs);
         }
 
     }
