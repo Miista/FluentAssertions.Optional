@@ -9,22 +9,22 @@ namespace FluentAssertions
     {
         [CustomAssertion]
         public static AndConstraint<StringAssertions> Be(
-            this StringAssertions @this,
+            this StringAssertions self,
             Option<string> expected,
             string because = "",
             params object[] becauseArgs)
         {
-            return @this.Be(expected.ValueOr(alternative: null), because, becauseArgs);
+            return self.Be(expected.ValueOr(alternative: null), because, becauseArgs);
         }
         
         [CustomAssertion]
         public static AndConstraint<StringAssertions> NotBe(
-            this StringAssertions assertions,
+            this StringAssertions self,
             Option<string> option,
             string because = "",
             params object[] becauseArgs)
         {
-            return assertions.NotBe(option.ValueOrDefault(), because, becauseArgs);
+            return self.NotBe(option.ValueOrDefault(), because, becauseArgs);
         }
     }
 }
